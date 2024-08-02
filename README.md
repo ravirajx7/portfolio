@@ -1,2 +1,3 @@
 # blog
-A repo to manage codebase for personal blog
+This repository will have codebase which is used for creating my personal blog
+
