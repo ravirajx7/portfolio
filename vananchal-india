@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vananchal India - Your Dropshipping Partner</title>
+    <style>
+        /* General Reset */
+        body, h1, h2, h3, p, ul, li, a {
+            margin: 0
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(90deg, #0f9b0f, #1d976c);
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2em;
+            margin-top: 5px;
+        }
+
+        /* Navigation */
+        nav {
+            background: #333;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #1d976c;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: url('https://source.unsplash.com/1600x900/?business,ecommerce') no-repeat center center/cover;
+            color: #fff;
+            height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+        }
+
+        .hero a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #1d976c;
+            color: #fff;
+            text-decoration: none;
+            font-size: 1.1em;
+            border-radius: 5px;
+        }
+
+        .hero a:hover {
+            background: #0f9b0f;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        .feature {
+            flex: 1 1 300px;
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+            color: #1d976c;
+        }
+
+        .feature p {
+            font-size: 1em;
+            color: #555;
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        footer a {
+            color: #1d976c;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Welcome to Vananchal India</h1>
+        <p>Your Trusted Partner in Dropshipping</p>
+    </header>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+        <a href="#shop">Shop</a>
+    </nav>
+    <section class="hero">
+        <div>
+            <h2>Launch Your Online Store with Ease</h2>
+            <p>We provide everything you need to succeed in the dropshipping business.</p>
+            <a href="#features">Learn More</a>
+        </div>
+    </section>
+    <section id="features" class="features">
+        <div class="feature">
+            <h3>Wide Product Range</h3>
+            <p>Explore a vast catalog of products to suit any niche.</p>
+        </div>
+        <div class="feature">
+            <h3>Fast Shipping</h3>
+            <p>Quick and reliable shipping options to satisfy your customers.</p>
+        </div>
+        <div class="feature">
+            <h3>24/7 Support</h3>
+            <p>Get dedicated assistance whenever you need it.</p>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2024 Vananchal India. All rights reserved. | <a href="#contact">Contact Us</a></p>
+    </footer>
+</body>
+</html>
