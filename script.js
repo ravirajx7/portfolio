@@ -1,58 +1,48 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Particle.js initialization
-    particlesJS.load('particles-js', 'particles.json', function() {
-        console.log('callback - particles.js config loaded');
-    });
 
     // Typewriter effect
     const typewriter = document.getElementById('typewriter');
     const phrases = [
-        'Innovative Software Engineer',
-        'Backend Development Expert',
-        'Creative Problem Solver'
+        'Dreamer',
+        'Believer',
+        'Builder',
+        'Innovator'
     ];
-    let i = 0;
-    let j = 0;
-    let currentPhrase = [];
+    let phraseIndex = 0;
+    let charIndex = 0;
     let isDeleting = false;
-    let isEnd = false;
 
-    function loop() {
-        isEnd = false;
-        typewriter.innerHTML = currentPhrase.join('');
+    function type() {
+        const currentPhrase = phrases[phraseIndex];
 
-        if (i < phrases.length) {
-            if (!isDeleting && j <= phrases[i].length) {
-                currentPhrase.push(phrases[i][j]);
-                j++;
-            }
-
-            if (isDeleting && j <= phrases[i].length) {
-                currentPhrase.pop(phrases[i][j]);
-                j--;
-            }
-
-            if (j == phrases[i].length) {
-                isEnd = true;
-                isDeleting = true;
-            }
-
-            if (isDeleting && j === 0) {
-                currentPhrase = [];
-                isDeleting = false;
-                i++;
-                if (i == phrases.length) {
-                    i = 0;
-                }
-            }
+        // Display the current phrase
+        if (!isDeleting && charIndex <= currentPhrase.length) {
+            typewriter.textContent = currentPhrase.substring(0, charIndex);
+            charIndex++;
         }
-        const spedUp = Math.random() * (80 - 50) + 50;
-        const normalSpeed = Math.random() * (300 - 200) + 200;
-        const time = isEnd ? 2000 : isDeleting ? spedUp : normalSpeed;
-        setTimeout(loop, time);
+
+        // Delete the current phrase
+        if (isDeleting && charIndex >= 0) {
+            typewriter.textContent = currentPhrase.substring(0, charIndex);
+            charIndex--;
+        }
+
+        // Switch to the next phrase or start deleting
+        if (!isDeleting && charIndex === currentPhrase.length + 1) {
+            isDeleting = true;
+            setTimeout(type, 1000); // Pause before deleting
+        } else if (isDeleting && charIndex === -1) {
+            isDeleting = false;
+            phraseIndex = (phraseIndex + 1) % phrases.length; // Move to the next phrase
+            setTimeout(type, 500); // Pause before typing the next phrase
+        } else {
+            const typingSpeed = isDeleting ? 100 : 200; // Adjust speed for typing and deleting
+            setTimeout(type, typingSpeed);
+        }
     }
 
-    loop();
+    // Start the typewriter effect
+    type();
 
     // Smooth scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
