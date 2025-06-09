@@ -1,752 +1,275 @@
-/* ===== CSS CUSTOM PROPERTIES ===== */
-/* Using CSS custom properties for consistent theming and easy maintenance */
+/* ===== MULTI-THEME PORTFOLIO STYLES ===== */
+
+/*
+ * =========================================
+ * BASE STYLES & RESETS
+ * =========================================
+ * These styles apply to all themes. They define the foundational layout,
+ * typography, and resets for cross-browser consistency.
+ */
 :root {
-    /* Color palette inspired by modern design systems */
-    --color-primary: #3b82f6;
-    --color-primary-dark: #2563eb;
-    --color-secondary: #10b981;
-    --color-accent: #f59e0b;
-    --color-danger: #ef4444;
-    
-    /* Neutral colors with careful contrast ratios for accessibility */
-    --color-background: #0a0a0a;
-    --color-surface: #111111;
-    --color-surface-elevated: #1a1a1a;
-    --color-border: #262626;
-    --color-border-light: #404040;
-    
-    /* Text colors with WCAG AA compliance */
-    --color-text-primary: #ffffff;
-    --color-text-secondary: #a3a3a3;
-    --color-text-tertiary: #737373;
-    
-    /* Typography scale based on modular scale */
-    --font-family-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    --font-family-mono: 'JetBrains Mono', 'Fira Code', monospace;
-    
-    /* Spacing system using 8px base unit */
-    --space-1: 0.25rem;
-    --space-2: 0.5rem;
-    --space-3: 0.75rem;
-    --space-4: 1rem;
-    --space-6: 1.5rem;
-    --space-8: 2rem;
-    --space-12: 3rem;
-    --space-16: 4rem;
-    --space-20: 5rem;
-    --space-24: 6rem;
-    
-    /* Border radius system */
-    --radius-sm: 0.375rem;
-    --radius-md: 0.5rem;
-    --radius-lg: 0.75rem;
-    --radius-xl: 1rem;
-    --radius-full: 9999px;
-    
-    /* Animation durations for consistent motion */
-    --duration-fast: 150ms;
-    --duration-normal: 300ms;
-    --duration-slow: 500ms;
-    
-    /* Shadows for depth and hierarchy */
-    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    --shadow-glow: 0 0 20px rgb(59 130 246 / 0.3);
+    --font-primary: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --duration: 0.6s;
+    --easing: cubic-bezier(0.2, 1, 0.3, 1);
 }
 
-/* ===== RESET AND BASE STYLES ===== */
-/* Modern CSS reset for consistent cross-browser rendering */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-html {
-    scroll-behavior: smooth;
-    /* Prevent horizontal scroll on mobile */
-    overflow-x: hidden;
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden; /* Prevent scrolling for this full-screen experience */
 }
 
 body {
-    font-family: var(--font-family-primary);
-    background-color: var(--color-background);
-    color: var(--color-text-primary);
-    line-height: 1.6;
-    font-size: 16px;
-    /* Improve text rendering */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
-    /* Prevent horizontal scroll */
-    overflow-x: hidden;
+    font-family: var(--font-primary);
+    transition: background-color var(--duration) var(--easing), color var(--duration) var(--easing);
 }
 
-/* ===== UTILITY CLASSES ===== */
-/* Container for consistent max-width and centering */
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--space-6);
-}
-
-/* Visually hidden content for screen readers */
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border: 0;
-}
-
-/* ===== ANIMATED BACKGROUND ===== */
-/* Subtle animated gradient background for visual interest */
-.animated-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    background: linear-gradient(
-        45deg,
-        var(--color-background) 0%,
-        #0f0f0f 25%,
-        var(--color-background) 50%,
-        #0f0f0f 75%,
-        var(--color-background) 100%
-    );
-    background-size: 400% 400%;
-    animation: gradientShift 20s ease infinite;
-}
-
-@keyframes gradientShift {
-    0%, 100% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-}
-
-/* Floating particles effect */
-.particles {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-}
-
-.particle {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    background: var(--color-primary);
-    border-radius: 50%;
-    opacity: 0.3;
-    animation: float 6s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
-    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.8; }
-}
-
-/* ===== HEADER NAVIGATION ===== */
-.header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 1000;
-    /* Glassmorphism effect for modern look */
-    background: rgba(10, 10, 10, 0.8);
-    backdrop-filter: blur(20px);
-    border-bottom: 1px solid var(--color-border);
-    transition: all var(--duration-normal) ease;
-}
-
-.nav {
+.content-wrapper {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    height: 70px;
-    padding: 0 var(--space-6);
-}
-
-.logo {
-    font-family: var(--font-family-mono);
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--color-primary);
-    text-decoration: none;
-    /* Subtle glow effect */
-    text-shadow: 0 0 10px rgba(59, 130, 246, 0.3);
-    transition: all var(--duration-normal) ease;
-}
-
-.logo:hover {
-    transform: scale(1.05);
-    text-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
-}
-
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: var(--space-8);
-}
-
-.nav-link {
-    color: var(--color-text-secondary);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 0.9rem;
-    position: relative;
-    transition: color var(--duration-normal) ease;
-}
-
-/* Animated underline effect */
-.nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--color-primary);
-    transition: width var(--duration-normal) ease;
-}
-
-.nav-link:hover {
-    color: var(--color-text-primary);
-}
-
-.nav-link:hover::after {
-    width: 100%;
-}
-
-/* Mobile menu toggle */
-.menu-toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    gap: 4px;
-    background: none;
-    border: none;
-    padding: var(--space-2);
-}
-
-.menu-toggle span {
-    width: 25px;
-    height: 2px;
-    background: var(--color-text-primary);
-    transition: all var(--duration-normal) ease;
-}
-
-/* ===== HERO SECTION ===== */
-.hero {
+    justify-content: center;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    position: relative;
-    padding: var(--space-20) 0;
-}
-
-.hero-content {
-    max-width: 800px;
-    animation: fadeInUp 1s ease-out;
-}
-
-.hero-greeting {
-    font-size: 1.1rem;
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-4);
-    font-weight: 400;
-}
-
-.hero-title {
-    font-size: clamp(2.5rem, 8vw, 4.5rem);
-    font-weight: 700;
-    line-height: 1.1;
-    margin-bottom: var(--space-6);
-    /* Gradient text effect */
-    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-primary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.hero-subtitle {
-    font-size: 1.25rem;
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-8);
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-/* Typewriter effect container */
-.typewriter-container {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: var(--space-8);
-}
-
-.typewriter {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--color-primary);
-    font-family: var(--font-family-mono);
-}
-
-/* Blinking cursor effect */
-.cursor {
-    display: inline-block;
-    width: 2px;
-    height: 1.5rem;
-    background: var(--color-primary);
-    margin-left: 2px;
-    animation: blink 1s infinite;
-}
-
-@keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
-}
-
-.hero-cta {
-    display: flex;
-    gap: var(--space-4);
-    justify-content: center;
-    flex-wrap: wrap;
-}
-
-/* ===== BUTTON COMPONENTS ===== */
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-6);
-    border-radius: var(--radius-lg);
-    font-weight: 600;
-    text-decoration: none;
-    transition: all var(--duration-normal) ease;
-    cursor: pointer;
-    border: none;
-    font-size: 0.95rem;
-    position: relative;
-    overflow: hidden;
-}
-
-.btn-primary {
-    background: var(--color-primary);
-    color: white;
-    box-shadow: var(--shadow-md);
-}
-
-.btn-primary:hover {
-    background: var(--color-primary-dark);
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-}
-
-.btn-secondary {
-    background: transparent;
-    color: var(--color-text-primary);
-    border: 1px solid var(--color-border-light);
-}
-
-.btn-secondary:hover {
-    background: var(--color-surface-elevated);
-    border-color: var(--color-primary);
-    transform: translateY(-2px);
-}
-
-/* Ripple effect for buttons */
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-    transition: width 0.6s, height 0.6s;
-}
-
-.btn:active::before {
-    width: 300px;
-    height: 300px;
-}
-
-/* ===== SECTION LAYOUTS ===== */
-.section {
-    padding: var(--space-20) 0;
-    position: relative;
-}
-
-.section-header {
-    text-align: center;
-    margin-bottom: var(--space-16);
-}
-
-.section-title {
-    font-size: clamp(2rem, 5vw, 3rem);
-    font-weight: 700;
-    margin-bottom: var(--space-4);
-    background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-primary) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.section-subtitle {
-    font-size: 1.1rem;
-    color: var(--color-text-secondary);
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-/* ===== ABOUT SECTION ===== */
-.about-grid {
-    display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: var(--space-12);
-    align-items: center;
-}
-
-.about-content {
-    font-size: 1.1rem;
-    line-height: 1.8;
-    color: var(--color-text-secondary);
-}
-
-.about-content p {
-    margin-bottom: var(--space-6);
-}
-
-.about-image {
-    position: relative;
-}
-
-.profile-image {
-    width: 100%;
-    height: 300px;
-    object-fit: cover;
-    border-radius: var(--radius-xl);
-    border: 3px solid var(--color-border);
-    transition: all var(--duration-slow) ease;
-    /* Subtle floating animation */
-    animation: profileFloat 6s ease-in-out infinite;
-}
-
-@keyframes profileFloat {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-}
-
-.profile-image:hover {
-    transform: scale(1.05) translateY(-10px);
-    border-color: var(--color-primary);
-    box-shadow: var(--shadow-glow);
-}
-
-/* ===== SKILLS SECTION ===== */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: var(--space-6);
-}
-
-.skill-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    padding: var(--space-8);
-    text-align: center;
-    transition: all var(--duration-normal) ease;
-    position: relative;
-    overflow: hidden;
-}
-
-/* Hover effect with subtle glow */
-.skill-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, transparent 0%, rgba(59, 130, 246, 0.05) 100%);
-    opacity: 0;
-    transition: opacity var(--duration-normal) ease;
-}
-
-.skill-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--color-primary);
-    box-shadow: var(--shadow-lg);
-}
-
-.skill-card:hover::before {
-    opacity: 1;
-}
-
-.skill-icon {
-    width: 60px;
-    height: 60px;
-    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
-    border-radius: var(--radius-lg);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto var(--space-4);
-    font-size: 1.5rem;
-    color: white;
-}
-
-.skill-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    margin-bottom: var(--space-4);
-    color: var(--color-text-primary);
-}
-
-.skill-list {
-    list-style: none;
-}
-
-.skill-list li {
-    color: var(--color-text-secondary);
-    margin-bottom: var(--space-2);
-    font-size: 0.95rem;
-}
-
-/* ===== PROJECTS SECTION ===== */
-.projects-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: var(--space-8);
-}
-
-.project-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    transition: all var(--duration-normal) ease;
-    position: relative;
-}
-
-.project-card:hover {
-    transform: translateY(-8px);
-    border-color: var(--color-primary);
-    box-shadow: var(--shadow-lg);
-}
-
-.project-content {
-    padding: var(--space-8);
-}
-
-.project-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: var(--space-4);
-    color: var(--color-text-primary);
-}
-
-.project-description {
-    color: var(--color-text-secondary);
-    line-height: 1.6;
-    margin-bottom: var(--space-6);
-}
-
-.project-link {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    color: var(--color-primary);
-    text-decoration: none;
-    font-weight: 600;
-    transition: all var(--duration-normal) ease;
-}
-
-.project-link:hover {
-    color: var(--color-primary-dark);
-    transform: translateX(4px);
-}
-
-/* ===== CONTACT SECTION ===== */
-.contact-content {
-    max-width: 600px;
-    margin: 0 auto;
+    padding: 2rem;
     text-align: center;
 }
 
-.contact-description {
-    font-size: 1.1rem;
-    color: var(--color-text-secondary);
-    line-height: 1.8;
-    margin-bottom: var(--space-8);
+.hero-title, .hero-subtitle, .social-links a {
+    transition: all var(--duration) var(--easing);
 }
 
 .social-links {
+    margin-top: 2rem;
     display: flex;
+    gap: 1.5rem;
     justify-content: center;
-    gap: var(--space-4);
     flex-wrap: wrap;
 }
 
-.social-link {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    padding: var(--space-3) var(--space-4);
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-lg);
-    color: var(--color-text-secondary);
+.social-links a {
     text-decoration: none;
-    transition: all var(--duration-normal) ease;
-    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 0;
 }
 
-.social-link:hover {
-    background: var(--color-surface-elevated);
-    border-color: var(--color-primary);
-    color: var(--color-text-primary);
-    transform: translateY(-2px);
+/*
+ * =========================================
+ * THEME SWITCHER
+ * =========================================
+ * The UI for changing themes. It's fixed to the corner and styled
+ * to be minimal and unobtrusive, yet artistic.
+ */
+.theme-switcher {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    z-index: 100;
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(0, 0, 0, 0.2);
+    padding: 0.5rem;
+    border-radius: 99px;
+    backdrop-filter: blur(10px);
 }
 
-/* ===== FOOTER ===== */
-.footer {
-    background: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-    padding: var(--space-8) 0;
-    text-align: center;
+.theme-button {
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: rgba(255, 255, 255, 0.7);
 }
 
-.footer-content {
-    color: var(--color-text-tertiary);
-    font-size: 0.9rem;
+.theme-button:hover {
+    border-color: rgba(255, 255, 255, 1);
+    transform: scale(1.1);
 }
 
-/* ===== ANIMATIONS ===== */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+.theme-button.active {
+    background: rgba(255, 255, 255, 1);
+    color: #000;
+    border-color: white;
 }
 
-/* Intersection Observer animation classes */
-.animate-on-scroll {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
+.theme-button svg {
+    width: 20px;
+    height: 20px;
+    stroke: currentColor;
 }
 
-.animate-on-scroll.visible {
-    opacity: 1;
-    transform: translateY(0);
+
+/*
+ * ===================================================================
+ * THEME 1: THE MINIMALIST GLITCH
+ * ===================================================================
+ * A digital, sharp theme using monospace fonts and glitch animations.
+ * Uses pseudo-elements and clip-path to create the visual effect.
+ */
+.theme-glitch {
+    background-color: #000000;
+    color: #00FF41;
+    font-family: var(--font-mono);
 }
 
-/* ===== RESPONSIVE DESIGN ===== */
-@media (max-width: 768px) {
-    .container {
-        padding: 0 var(--space-4);
-    }
-    
-    .nav-links {
-        display: none;
-    }
-    
-    .menu-toggle {
-        display: flex;
-    }
-    
-    .hero {
-        padding: var(--space-16) 0;
-    }
-    
-    .hero-cta {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .about-grid {
-        grid-template-columns: 1fr;
-        gap: var(--space-8);
-        text-align: center;
-    }
-    
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .social-links {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .section {
-        padding: var(--space-12) 0;
-    }
+.theme-glitch .hero-title {
+    font-size: clamp(3rem, 15vw, 10rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    position: relative;
+    animation: glitch-scan 4s linear infinite;
 }
 
-@media (max-width: 480px) {
-    .skills-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .projects-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .skill-card,
-    .project-card {
-        margin: 0 var(--space-2);
-    }
+.theme-glitch .hero-title::before,
+.theme-glitch .hero-title::after {
+    content: attr(data-text); /* JS will set this */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    overflow: hidden;
 }
 
-/* ===== ACCESSIBILITY IMPROVEMENTS ===== */
-/* Focus styles for keyboard navigation */
-.btn:focus,
-.nav-link:focus,
-.social-link:focus {
-    outline: 2px solid var(--color-primary);
-    outline-offset: 2px;
+.theme-glitch .hero-title::before {
+    left: 2px;
+    text-shadow: -2px 0 #FF00C1;
+    clip-path: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
 }
 
-/* Reduced motion for users who prefer it */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
+.theme-glitch .hero-title::after {
+    left: -2px;
+    text-shadow: -2px 0 #00FF41, 2px 2px #FF00C1;
+    clip-path: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-    :root {
-        --color-border: #ffffff;
-        --color-text-secondary: #ffffff;
-    }
+@keyframes glitch-anim {
+  0% { clip-path: inset(40% 0 61% 0); } 100% { clip-path: inset(20% 0 1% 0); }
+}
+@keyframes glitch-scan {
+  0%, 100% { transform: translateY(0); } 50% { transform: translateY(2px); }
+}
+
+
+.theme-glitch .social-links a {
+    color: #00FF41;
+}
+
+.theme-glitch .social-links a:hover {
+    background-color: #00FF41;
+    color: #000;
+}
+
+/*
+ * ===================================================================
+ * THEME 2: THE ORGANIC INK
+ * ===================================================================
+ * A fluid, artistic theme using CSS filters for a "metaball" effect.
+ * It feels soft, natural, and interactive.
+ */
+.theme-ink {
+    background-color: #F0EAD6; /* Papyrus-like color */
+    color: #1a1a1a;
+}
+.theme-ink .theme-switcher { background: rgba(255,255,255,0.2); }
+.theme-ink .theme-button { border-color: rgba(0,0,0,0.3); color:rgba(0,0,0,0.7); }
+.theme-ink .theme-button:hover { border-color: #000; }
+.theme-ink .theme-button.active { background:#000; color:#fff; }
+
+.theme-ink .hero {
+    /* The magic container for the metaball effect */
+    filter: blur(5px) contrast(20);
+}
+
+.theme-ink .hero-content {
+    /* Must have a solid background to participate in the filter effect */
+    background-color: #F0EAD6;
+    border-radius: 20px; /* Rounded for a softer feel */
+}
+
+.theme-ink .hero-title {
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 400;
+    animation: ink-flow 10s ease-in-out infinite alternate;
+}
+@keyframes ink-flow {
+  from { transform: scale(0.95); letter-spacing: -5px; }
+  to { transform: scale(1.05); letter-spacing: 0px; }
+}
+
+.theme-ink .hero-subtitle {
+    font-size: 1.2rem;
+    font-weight: 400;
+}
+
+.theme-ink .social-links a {
+    color: #1a1a1a;
+    transition: letter-spacing 0.4s;
+}
+
+.theme-ink .social-links a:hover {
+    letter-spacing: 2px;
+}
+
+/*
+ * ===================================================================
+ * THEME 3: THE BRUTALIST REMIX
+ * ===================================================================
+ * A raw, bold, and unapologetic theme. Uses stark contrasts,
+ * hard shadows, and no transitions for an immediate, blocky feel.
+ */
+.theme-brutalist {
+    background-color: #FFFF00; /* A harsh, vibrant yellow */
+    color: #000000;
+}
+.theme-brutalist .theme-switcher { background: rgba(0,0,0,0.2); }
+.theme-brutalist .theme-button { border-color: rgba(0,0,0,0.3); color:rgba(0,0,0,0.7); }
+.theme-brutalist .theme-button:hover { border-color: #000; }
+.theme-brutalist .theme-button.active { background:#000; color:#fff; }
+
+
+.theme-brutalist .hero-content {
+    background: #FFFF00;
+    padding: 2rem;
+    border: 3px solid #000000;
+    box-shadow: 10px 10px 0 #000000;
+}
+
+.theme-brutalist .hero-title {
+    font-size: clamp(4rem, 15vw, 10rem);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.theme-brutalist .hero-subtitle {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    font-weight: 700;
+    background-color: #000;
+    color: #FFFF00;
+    padding: 0.5rem;
+    display: inline-block;
+}
+
+.theme-brutalist .social-links a {
+    color: #000;
+    border: 2px solid #000;
+    padding: 0.5rem 1rem;
+    /* NO transitions for the brutalist feel */
+}
+
+.theme-brutalist .social-links a:hover {
+    background-color: #000;
+    color: #FFFF00;
 }
