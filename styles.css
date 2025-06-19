@@ -674,7 +674,22 @@ body {
     .nav-links {
         display: none;
     }
-    
+    .nav-links.mobile-open {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 70px; /* height of your header */
+        left: 0;
+        width: 100%;
+        background: rgba(10, 10, 10, 0.98);
+        z-index: 999;
+        gap: 2rem;
+        padding: 2rem 0;
+        align-items: center;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        border-bottom: 1px solid var(--color-border);
+        animation: fadeInUp 0.4s;
+    }
     .menu-toggle {
         display: flex;
     }
