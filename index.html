@@ -39,6 +39,11 @@
             <li><a href="https://rjx7.blogspot.com/" target="_blank" rel="noopener noreferrer" class="nav-link">Blog</a></li>
         </ul>
 
+        <!-- Theme toggle button -->
+        <button class="theme-toggle" aria-label="Toggle theme" id="themeToggle">
+            <span id="themeIcon">🌓</span>
+        </button>
+
         <!-- Mobile menu toggle -->
         <button class="menu-toggle" aria-label="Toggle mobile menu" id="menuToggle">
             <span></span>
@@ -233,5 +238,46 @@
 
 <!-- Link to external JavaScript file -->
 <script src="script.js"></script>
+<script>
+(function() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const storedTheme = localStorage.getItem('theme');
+    function setTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        themeIcon.textContent = theme === 'dark' ? '🌙' : (theme === 'light' ? '☀️' : '🌓');
+    }
+    function getSystemTheme() {
+        return prefersDark ? 'dark' : 'light';
+    }
+    function applyTheme() {
+        if (storedTheme === 'dark' || storedTheme === 'light') {
+            setTheme(storedTheme);
+        } else {
+            setTheme(getSystemTheme());
+        }
+    }
+    applyTheme();
+    themeToggle.addEventListener('click', function() {
+        let current = document.documentElement.getAttribute('data-theme');
+        if (current === 'dark') {
+            setTheme('light');
+        } else if (current === 'light') {
+            setTheme('system');
+            setTheme(getSystemTheme());
+            localStorage.removeItem('theme');
+        } else {
+            setTheme('dark');
+        }
+    });
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (!localStorage.getItem('theme')) {
+            setTheme(e.matches ? 'dark' : 'light');
+        }
+    });
+})();
+</script>
 </body>
 </html>
